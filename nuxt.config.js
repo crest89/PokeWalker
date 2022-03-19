@@ -3,7 +3,7 @@ export default {
   head: {
     title: 'poke-walker',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
@@ -15,7 +15,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
+  srcDir: 'src/',
+  router:{base: baseDir,},
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
