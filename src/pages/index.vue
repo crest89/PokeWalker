@@ -3,20 +3,31 @@
 
 <script>
 import { uuid } from 'uuidv4'
-import { addDoc, collection } from '~/src/plugins/firebase.js'
+import { firebase } from "~/plugins/firebase";
+import { addDoc, collection } from 'firebase/firestore';
 
+const db  = firebase
 export default {
    data() {
     return {
       trainer:{
-          uuid: '',
+          userId: '',
       }
     }
   },
   mounted() {
     window.onload = ()=> {
-      const id = uuid()
-      console.log(id)
+      const userId = uuid()
+      console.log(userId)
+      try {
+        const docRef =  addDoc(collection(db, 'trainer'), {
+            id:userId
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+
     }
   },
 }
