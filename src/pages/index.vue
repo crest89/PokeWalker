@@ -1,12 +1,12 @@
 <template>
 </template>
 
-<script>
+<script lang ="js">
 import { uuid } from 'uuidv4'
-import { firebase } from "~/plugins/firebase";
-import { addDoc, collection } from 'firebase/firestore';
+import  fb  from "~/plugins/firebase";
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 
-const db  = firebase
+const db = fb
 export default {
    data() {
     return {
@@ -18,17 +18,16 @@ export default {
   mounted() {
     window.onload = ()=> {
       const userId = uuid()
-      console.log(userId)
-      try {
-        const docRef =  addDoc(collection(db, 'trainer'), {
+        console.log(userId)
+        try {
+          const docRef =  addDoc(collection(db, 'trainer'), {
             id:userId
-        });
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
-
+          });
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
     }
-  },
+  }
 }
 </script>
