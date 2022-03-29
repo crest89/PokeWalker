@@ -39,6 +39,7 @@ export default {
         min = Math.ceil(1);
         max = Math.floor(898);
         return this.randamNum = Math.floor(Math.random() * (max - min + 1) + min);
+        this.$store.dispatch('fetchPokeData', randamNum);
         //async fetch() {
           //this.pokemons = await fetch("https://pokeapi.co/api/v2/pokemon")
           //.then(res => res.json())
