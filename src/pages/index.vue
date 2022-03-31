@@ -1,5 +1,5 @@
 <template>
-  <button  v-on:click="getRandomNum">{{ randamNum }}</button>
+  <button  v-on:click="getRandomNum">{{ randamNum }}{{ pokemon }}</button>
 </template>
 
 <script lang ="js">
@@ -12,7 +12,7 @@ export default {
    data() {
     return {
       randamNum: '',
-      pokemons: []
+      pokemon: ''
     }
   },
 
@@ -40,6 +40,9 @@ export default {
         max = Math.floor(898);
         return this.randamNum = Math.floor(Math.random() * (max - min + 1) + min);
         this.$store.dispatch('fetchPokeData', randamNum);
+        this.pokemon = this.$store.state.species
+        console.log(this.$store.state.species)
+
         //async fetch() {
           //this.pokemons = await fetch("https://pokeapi.co/api/v2/pokemon")
           //.then(res => res.json())
