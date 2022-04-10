@@ -1,5 +1,8 @@
 <template>
-  <button  v-on:click="getPokemon">{{ name }}</button>
+  <div>
+    <button  v-on:click="getPokemon">{{ name }}</button>
+    <img v-bind:src="form" alt="">
+  </div>
 </template>
 
 <script lang ="js">
@@ -18,6 +21,7 @@ export default {
       englishName: null,
       name: null,
       genera: null,
+      form: null,
       //type: null,
       //flavorText: null,
       local: 'ja-Hrkt'
@@ -50,9 +54,11 @@ export default {
         this.species = resulte1.data
         const resulte2 = await axios.get(resulte1.data.varieties[0].pokemon.url)
         this.pokemon = resulte2.data
-
+        const resulte3 = await axios.get(`https://pokeapi.co/api/v2/pokemon-form/${randamNum}`)
+        this.forms = resulte3.data
         this.getI18Name()
         this.getI18Genera()
+        this.getFormUrl()
         //this.getTypes()
         //this.getI18nFlavorText()
         //this.habitat = this.species.pal_park__encounters[0].area.name
@@ -71,6 +77,11 @@ export default {
       const result = genera.find(v => v.language.name === this.local)
       this.genera = result.genus
       console.log(result.genus)
+    },
+    getFormUrl: function() {
+      const formUrl = this.forms.sprites.front_default
+      this.form = formUrl
+      console.log(formUrl)
     }
      //getTypes: async function () *
       //const urls = []
