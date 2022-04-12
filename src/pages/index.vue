@@ -56,23 +56,23 @@ export default {
         this.pokemon = resulte2.data
         const resulte3 = await axios.get(`https://pokeapi.co/api/v2/pokemon-form/${randamNum}`)
         this.forms = resulte3.data
-        this.getI18Name()
-        this.getI18Genera()
+        this.getI18nName()
+        this.getI18nGenera()
         this.getFormUrl()
         //this.getTypes()
-        //this.getI18nFlavorText()
+        this.getI18nFlavorText()
         //this.habitat = this.species.pal_park__encounters[0].area.name
       } catch {
         alert('通信エラーが発生しました')
       }
     },
 
-    getI18Name: function() {
+    getI18nName: function() {
       const names = this.species.names
       const result = names.find(v => v.language.name === this.local)
       this.name = result.name
     },
-    getI18Genera: function() {
+    getI18nGenera: function() {
       const genera = this.species.genera
       const result = genera.find(v => v.language.name === this.local)
       this.genera = result.genus
@@ -82,7 +82,7 @@ export default {
       const formUrl = this.forms.sprites.front_default
       this.form = formUrl
       console.log(formUrl)
-    }
+    },
      //getTypes: async function () *
       //const urls = []
       //for (const type of this.pokemon.types) {
@@ -99,11 +99,11 @@ export default {
   //}
       //this.type = result_types
     //},
-    //getI18nFlavorText: function() {
-      //const flavor_text_entries = this.species.flavor_text_entries;
-      //const result = flavor_text_entries.find(v => v.language.name === this.local);
-      //this.flavorText = result.flavor_text;
-    //},
+    getI18nFlavorText: function() {
+      const flavor_text_entries = this.species.flavor_text_entries;
+      const result = flavor_text_entries.find(v => v.language.name === this.local);
+      this.flavorText = result.flavor_text;
+    },
 
   }
 }
