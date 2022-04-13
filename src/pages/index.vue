@@ -59,7 +59,7 @@ export default {
         this.getI18nName()
         this.getI18nGenera()
         this.getFormUrl()
-        //this.getTypes()
+        this.getTypes()
         this.getI18nFlavorText()
         //this.habitat = this.species.pal_park__encounters[0].area.name
       } catch {
@@ -83,22 +83,22 @@ export default {
       this.form = formUrl
       console.log(formUrl)
     },
-     //getTypes: async function () *
-      //const urls = []
-      //for (const type of this.pokemon.types) {
-        //urls.push(type.type.url)
-      //}
-      //const types = await Promise.all(urls.map(axios.get))
-      //this.getI18nType(types)
-    //}
-     //getI18nType: function(types) {
-      //let result_types = ''
-      //for (const type of types) {
-        //const type_name = type.data.names.find(v => v.language.name === this.local)
-        //result_types += `《${type_name.name}》`
-  //}
-      //this.type = result_types
-    //},
+     getTypes: async function () {
+      const urls = []
+      for (const type of this.pokemon.types) {
+        urls.push(type.type.url)
+      }
+      const types = await Promise.all(urls.map(axios.get))
+      this.getI18nType(types)
+      },
+     getI18nType: function(types) {
+      let result_types = ''
+      for (const type of types) {
+        const type_name = type.data.names.find(v => v.language.name === this.local)
+        result_types += `《${type_name.name}》`
+      }
+      this.type = result_types
+    },
     getI18nFlavorText: function() {
       const flavor_text_entries = this.species.flavor_text_entries;
       const result = flavor_text_entries.find(v => v.language.name === this.local);
